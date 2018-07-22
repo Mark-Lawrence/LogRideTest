@@ -27,7 +27,7 @@ class ItemsTableViewController: UITableViewController {
         }
         let userID = Auth.auth().currentUser
         let id = userID?.uid
-        self.parksModelRef = Database.database().reference(withPath: "parks-list/\(id!)")
+        self.parksModelRef = Database.database().reference(withPath: "parks-list/\(id!) ")
         
         parksModelRef.observe(.value, with: { snapshot in
             var newItems: [ParksList] = []
@@ -39,6 +39,7 @@ class ItemsTableViewController: UITableViewController {
                 }
             }
             self.items = newItems
+            print("observe")
             self.tableView.reloadData()
         })
     }

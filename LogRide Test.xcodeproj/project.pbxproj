@@ -14,10 +14,10 @@
 		5F2EEC3A21040D6E0036B47A /* ItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EEC3921040D6E0036B47A /* ItemsTableViewController.swift */; };
 		5F2EEC3C21040D770036B47A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EEC3B21040D770036B47A /* LoginViewController.swift */; };
 		5F2EEC3E21040D7C0036B47A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EEC3D21040D7B0036B47A /* SignUpViewController.swift */; };
-		5F2EEC4021040DE50036B47A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F2EEC3F21040DE40036B47A /* GoogleService-Info.plist */; };
 		5F2EEC42210411E40036B47A /* ParksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EEC41210411E40036B47A /* ParksList.swift */; };
 		5F2EEC4521041FDC0036B47A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EEC4421041FDC0036B47A /* User.swift */; };
 		5F2EEC472104270A0036B47A /* AddParkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EEC462104270A0036B47A /* AddParkViewController.swift */; };
+		5F2EEC4B210434240036B47A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F2EEC4A210434240036B47A /* GoogleService-Info.plist */; };
 		DB097E4A540791A5EBD3757B /* Pods_LogRide_Test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6935018893B00AF30F2408 /* Pods_LogRide_Test.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,11 +33,11 @@
 		5F2EEC3921040D6E0036B47A /* ItemsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsTableViewController.swift; sourceTree = "<group>"; };
 		5F2EEC3B21040D770036B47A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5F2EEC3D21040D7B0036B47A /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		5F2EEC3F21040DE40036B47A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5F2EEC41210411E40036B47A /* ParksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParksList.swift; sourceTree = "<group>"; };
 		5F2EEC4321041C9B0036B47A /* LogRide Test.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "LogRide Test.entitlements"; sourceTree = "<group>"; };
 		5F2EEC4421041FDC0036B47A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5F2EEC462104270A0036B47A /* AddParkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddParkViewController.swift; sourceTree = "<group>"; };
+		5F2EEC4A210434240036B47A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E74017177DFF0175F764967B /* Pods-LogRide Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogRide Test.release.xcconfig"; path = "Pods/Target Support Files/Pods-LogRide Test/Pods-LogRide Test.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,7 +86,7 @@
 				5F2EEC462104270A0036B47A /* AddParkViewController.swift */,
 				5F2EEC3B21040D770036B47A /* LoginViewController.swift */,
 				5F2EEC3D21040D7B0036B47A /* SignUpViewController.swift */,
-				5F2EEC3F21040DE40036B47A /* GoogleService-Info.plist */,
+				5F2EEC4A210434240036B47A /* GoogleService-Info.plist */,
 			);
 			path = "LogRide Test";
 			sourceTree = "<group>";
@@ -174,9 +174,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F2EEC3221040D390036B47A /* LaunchScreen.storyboard in Resources */,
+				5F2EEC4B210434240036B47A /* GoogleService-Info.plist in Resources */,
 				5F2EEC2F21040D390036B47A /* Assets.xcassets in Resources */,
 				5F2EEC2D21040D370036B47A /* Main.storyboard in Resources */,
-				5F2EEC4021040DE50036B47A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

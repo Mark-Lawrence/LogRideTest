@@ -1,0 +1,6 @@
+framework module Pods_LogRide_Test {
+  umbrella header "Pods-LogRide Test-umbrella.h"
+
+  export *
+  module * { export * }
+}
