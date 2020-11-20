@@ -1,0 +1,570 @@
+---
+swagger: 2.0
+info:
+  description: This is a simple API
+  version: 1.0.0
+  title: LogRide API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: virtserver.swaggerhub.com
+basePath: /ParkWide/LogRide/1.0.0
+tags:
+- name: parks
+- name: attractions
+- name: photos
+- name: challenges
+- name: utilities
+schemes:
+- https
+paths:
+  /parks:
+    get:
+      tags:
+      - parks
+      summary: gets a list of all parks
+      description: |
+        Returns a list of all parks, sorted by parkID
+      operationId: allParks
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: List of all parks
+  /parks/{parkID}:
+    get:
+      tags:
+      - parks
+      summary: gets details for a specific park
+      description: |
+        Returns all the details for a specific park
+      operationId: parkDetails
+      produces:
+      - application/json
+      parameters:
+      - name: parkID
+        in: path
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Details of submitted park
+  /parks/userSubmit:
+    post:
+      tags:
+      - parks
+      summary: Post a new user submitted park
+      description: User submits a new park to the submitted parks list
+      operationId: submitNewPark
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: submitted Data
+        description: JSON of the data the user is going to submit
+        required: false
+        schema:
+          $ref: '#/definitions/SubmittedPark'
+      responses:
+        "200":
+          description: User submitted new park
+  /attractions/{parkID}:
+    get:
+      tags:
+      - attractions
+      summary: Get attractions from a park
+      description: Returns details for a given attraction
+      operationId: attractionsFromPark
+      produces:
+      - application/json
+      parameters:
+      - name: parkID
+        in: path
+        required: true
+        type: integer
+      - name: coasterOnly
+        in: query
+        description: Set true and the API only return coasters
+        required: false
+        type: boolean
+      - name: includedAttractionTypes
+        in: query
+        description: Comma separated list of attractionType IDs to only include
+        required: false
+        type: string
+      - name: moveArticlePrefixes
+        in: query
+        description: Set true and the API will return artcles in front of the attraction name. Example returns The Barnstormer instead of Barnstormer, The
+        required: false
+        type: boolean
+      responses:
+        "200":
+          description: List of most used details of each attractions in the parkID provided
+  /attractions/details/{attractionID}:
+    get:
+      tags:
+      - attractions
+      summary: Get attraction details
+      description: Returns details for a given attraction
+      operationId: attractionDetails
+      produces:
+      - application/json
+      parameters:
+      - name: attractionID
+        in: path
+        required: true
+        type: integer
+      - name: moveArticlePrefixes
+        in: query
+        description: Set true and the API will return artcles in front of the attraction name. Example returns The Barnstormer instead of Barnstormer, The
+        required: false
+        type: boolean
+      - name: convertToMetic
+        in: query
+        description: Set true and the API will return metric units
+        required: false
+        type: boolean
+      responses:
+        "200":
+          description: Includes all deatils of an attraction, all photos, and citations of the attractions
+  /attractions/batch:
+    get:
+      tags:
+      - attractions
+      summary: Get attraction batch attractions from list of parks
+      description: Returns list of attractions by, grouped by park.
+      operationId: attractionsBatchDownload
+      produces:
+      - application/json
+      parameters:
+      - name: parkIDList
+        in: query
+        description: Comma separated list of parkIDs
+        required: true
+        type: string
+      - name: moveArticlePrefixes
+        in: query
+        description: Set true and the API will return artcles in front of the attraction name. Example returns The Barnstormer instead of Barnstormer, The
+        required: false
+        type: boolean
+      - name: convertToMetic
+        in: query
+        description: Set true and the API will return metric units
+        required: false
+        type: boolean
+      responses:
+        "200":
+          description: Returns only the most used attraction details for each park entered. Call attraction/details for more details of an attraction
+  /attractions/userSubmit:
+    post:
+      tags:
+      - attractions
+      summary: Post attraction modification or new attraction
+      description: Returns details for a given attraction
+      operationId: attractionSubmit
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: submitted Data
+        description: JSON of the data the user is going to submit
+        required: false
+        schema:
+          $ref: '#/definitions/SubmittedPhoto'
+      responses:
+        "200":
+          description: Submited new attraction
+  /photos/userSubmit:
+    post:
+      tags:
+      - photos
+      summary: Post photo to user submitted photo
+      description: Returns details for a given attraction
+      operationId: photoSubmit
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: submitted Data
+        description: JSON of the data the user is going to submit
+        required: false
+        schema:
+          $ref: '#/definitions/SubmittedPhoto'
+      responses:
+        "200":
+          description: Includes all deatils of an attraction, all photos, and citations of the attractions
+  /challenges:
+    get:
+      tags:
+      - challenges
+      summary: gets all challenges
+      description: |
+        Returns a list of all challenges - includes challenges that are not enabled anymore in case the user has completed them in the past.
+      operationId: allChallenges
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: List of all challenges
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ChallengeDetails'
+  /challenges/{challengeID}:
+    get:
+      tags:
+      - challenges
+      summary: gets details for a specific challenge
+      description: |
+        Returns challenge data and a list requirments for that challenge
+      operationId: challengeDetails
+      produces:
+      - application/json
+      parameters:
+      - name: challengeID
+        in: path
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: returned challenge data
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ChallengeData'
+        "404":
+          description: Challenge ID does not exist
+  /utilities/attractionTypes:
+    get:
+      tags:
+      - utilities
+      summary: Get list of attraction types
+      description: |
+        Returns a list of attraction types - including sort values
+      operationId: attractionTypes
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: List of attraction types
+  /utilities/parkTypes:
+    get:
+      tags:
+      - utilities
+      summary: Get list of LogRide stats
+      description: |
+        Returns a list of park type
+      operationId: parkTypes
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: List of park types
+  /utilities/numberOfAttractions/{parkID}:
+    get:
+      tags:
+      - utilities
+      summary: Get number of attractions in a park
+      description: Returns the number of attractions to display at the initial total attractions
+      operationId: numberOfAttractions
+      produces:
+      - application/json
+      parameters:
+      - name: parkID
+        in: path
+        required: true
+        type: integer
+      - name: coasterOnly
+        in: query
+        description: Set true and the API only return coasters
+        required: false
+        type: boolean
+      - name: includedAttractionTypes
+        in: query
+        description: Comma separated list of attractionType IDs to only include
+        required: false
+        type: string
+      responses:
+        "200":
+          description: List of park types
+  /utilities/manufacturers:
+    get:
+      tags:
+      - utilities
+      summary: Get list of all manufacturers
+      description: |
+        Returns a list of manufacturers
+      operationId: manufacturerList
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: List of manufacturers
+  /utilities/models/{manufacturerID}:
+    get:
+      tags:
+      - utilities
+      summary: Get list of all manufacturers
+      description: |
+        Returns a list of manufacturers
+      operationId: modelList
+      produces:
+      - application/json
+      parameters:
+      - name: manufacturerID
+        in: path
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: List of manufacturers
+  /utilities/userSubmissions/{uid}:
+    get:
+      tags:
+      - utilities
+      summary: Get list of all user submitted data
+      description: |
+        Returns a list of manufacturers
+      operationId: getuserSubmissiondata
+      produces:
+      - application/json
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        type: string
+      responses:
+        "200":
+          description: List of submitted attractions, parks, photos
+  /utilities/LogRideStats:
+    get:
+      tags:
+      - utilities
+      summary: Get list of LogRide stats
+      description: |
+        Returns a list of LogRide Stats
+      operationId: logrideStats
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: List of stats
+  /utilities/dateRangeStats:
+    get:
+      tags:
+      - utilities
+      summary: Get list of date range stats
+      description: |
+        Returns a list of date range stats
+      operationId: dateRangeStats
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: List of date range stats
+  /utilities/articlePrefixes:
+    get:
+      tags:
+      - utilities
+      summary: Get list of article Prefixes
+      description: |
+        Returns a list of article prefixes
+      operationId: articlePrefixes
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: List of article prefixes
+  /utilities/goalPhrases:
+    get:
+      tags:
+      - utilities
+      summary: Gets random phrase for goal achievement
+      description: |
+        Returns a goal phrase based on submitted attraction type ID
+      operationId: goalPhrases
+      produces:
+      - application/json
+      parameters:
+      - name: rideTypeID
+        in: query
+        description: attractionTypeID
+        required: true
+        type: string
+      responses:
+        "200":
+          description: List of article prefixes
+definitions:
+  ChallengeData:
+    type: object
+    properties:
+      challengeDetails:
+        $ref: '#/definitions/ChallengeDetails'
+      challengeRequirments:
+        $ref: '#/definitions/ChallengeRequirments'
+  SubmittedPhoto:
+    properties:
+      uuid:
+        type: string
+        example: 123455
+      rideID:
+        type: integer
+        example: 123
+      parkID:
+        type: integer
+        example: 180
+      photoArtist:
+        type: string
+        example: LogRider
+      rideName:
+        type: string
+        example: Chettah Hunt
+      parkName:
+        type: string
+        example: Busch Gardens
+      rideType:
+        type: integer
+        example: 1
+      token:
+        type: string
+        example: 124dasfa
+      userID:
+        type: string
+        example: 4343324231
+      platformID:
+        type: integer
+        example: 1
+  SubmittedPark:
+    properties:
+      name:
+        type: string
+        example: New Theme Park
+      type:
+        type: string
+        example: Theme Park
+      city:
+        type: string
+        example: Orlando
+      count:
+        type: string
+        example: United States
+      long:
+        type: number
+        example: 180.012
+      lat:
+        type: number
+        example: 172.024
+      open:
+        type: integer
+        example: 1
+      closed:
+        type: integer
+        example: 0
+      defunct:
+        type: integer
+        example: 0
+      prevName:
+        type: string
+        example: ""
+      seasonal:
+        type: integer
+        example: 0
+      userName:
+        type: string
+        example: LogRider
+      website:
+        type: string
+        example: www.logrideapp.com
+      userID:
+        type: string
+        example: 1343fasfsdfs214
+      tokenID:
+        type: string
+        example: 1343fasfsdfs214
+      isPro:
+        type: integer
+        example: 1
+      parkTypeID:
+        type: integer
+        example: 1
+      platformID:
+        type: integer
+        example: 1
+  ChallengeDetails:
+    properties:
+      challengeID:
+        type: integer
+        example: 1
+      challengeName:
+        type: string
+        example: Magic Kingdom Coasters
+      description:
+        type: string
+        example: Complete all coasters at Magic Kingdom
+      scope:
+        type: string
+        example: Attraction
+      sectionID:
+        type: integer
+        example: 1
+      sectionString:
+        type: string
+        example: Walt Disney World
+      enabled:
+        type: boolean
+        example: true
+      secret:
+        type: boolean
+        example: false
+      datedChallenge:
+        type: string
+        example: 0000-00-00
+      tintRed:
+        type: integer
+        example: 124
+      tintGreen:
+        type: integer
+        example: 54
+      tintBlue:
+        type: integer
+        example: 164
+      parkIDs:
+        type: array
+        example: ""
+  ChallengeRequirments:
+    properties:
+      challengeID:
+        type: integer
+        example: 1
+      requirementID:
+        type: integer
+        example: 1
+      headerLabel:
+        type: string
+        example: Big Thunder Mountain Railroad
+      descriptionLabel:
+        type: string
+        example: Magic Kingdom
+      numberOfExperiencesRequired:
+        type: integer
+        example: 1
+      requiredAttraction:
+        $ref: '#/definitions/RequiredAttraction'
+  RequiredAttraction:
+    properties:
+      parkID:
+        type: integer
+        example: 180
+      attractionID:
+        type: integer
+        example: 11164
